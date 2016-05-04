@@ -1,21 +1,23 @@
-# AVIT ZSH Theme
+# Tranby ZSH Theme
+# Modified version of AVIT ZSH Theme
 
 PROMPT='
-$(_user_host)${_current_dir} $(git_prompt_info) $(_ruby_version)
+$(_user_host)$(_current_dir_func) $(git_prompt_info) $(_ruby_version)
 %{$fg[$CARETCOLOR]%}▶%{$resetcolor%} '
 
 PROMPT2='%{$fg[$CARETCOLOR]%}◀%{$reset_color%} '
 
 RPROMPT='$(_vi_status)%{$(echotc UP 1)%}$(_git_time_since_commit) $(git_prompt_status) ${_return_status}%{$(echotc DO 1)%}'
 
-local _current_dir="%{$fg_bold[blue]%}%3~%{$reset_color%} "
+#local _current_dir=$(_current_dir) #"%{$fg_bold[blue]%}%90~%{$reset_color%} "
 local _return_status="%{$fg_bold[red]%}%(?..⍉)%{$reset_color%}"
 local _hist_no="%{$fg[grey]%}%h%{$reset_color%}"
 
-function _current_dir() {
-  local _max_pwd_length="65"
+# Elipses Current Working Directory (PWD) if too long
+function _current_dir_func() {
+  local _max_pwd_length="200" # original "65"
   if [[ $(echo -n $PWD | wc -c) -gt ${_max_pwd_length} ]]; then
-    echo "%{$fg_bold[blue]%}%-2~ ... %3~%{$reset_color%} "
+    echo "%{$fg_bold[blue]%}%-3~ ... %6~%{$reset_color%} "
   else
     echo "%{$fg_bold[blue]%}%~%{$reset_color%} "
   fi
