@@ -23,3 +23,8 @@ lwd() {
 [[ "$PWD" != "$HOME" ]] && return
 
 lwd 2>/dev/null && ZSH_LAST_WORKING_DIRECTORY=1 || true
+
+# STEVE: comment out when using OSX Terminal.app
+# if [[ -z "$ZSH_LAST_WORKING_DIRECTORY" ]]; then
+# 	lwd 2>/dev/null && ZSH_LAST_WORKING_DIRECTORY=1 || true
+# fi
